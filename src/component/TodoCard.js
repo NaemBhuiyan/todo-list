@@ -5,17 +5,16 @@ import useTodoContext from '../hooks/useTodoContext'
 const formattedDate = (postedTime)=> new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(postedTime))
 
 function TodoCard({todoObj}) {
-	const {todoContent, postedTime, id} = todoObj
-    const { dispatch } =  useTodoContext()
-    const  [editText, setEditText] = useState('')
+		const {todoContent, postedTime, id} = todoObj;
+    const { dispatch } =  useTodoContext();
+    const  [editText, setEditText] = useState('');
+    const [isEdit, setIsEdit] = useState(false);
+
 
     useEffect(()=>{
         setEditText(todoContent)
     },[todoContent])
     
-
-
-   const [isEdit, setIsEdit] = useState(false)
 
    const handleEdit = ()=>{
         setIsEdit(true)
@@ -23,23 +22,22 @@ function TodoCard({todoObj}) {
    
    const handleSaveEdit = ()=>{
        dispatch({
-        type: 'EDIT',
-        payload: {
-            ...todoObj,
-            todoContent: editText,
-        }
-    })
-    setIsEdit(false)
-
+            type: 'EDIT',
+            payload: {
+                ...todoObj,
+                todoContent: editText,
+            }
+        })
+        setIsEdit(false)
    }
 
    const handleDelete = ()=>{
-    dispatch({
-        type: 'DELETE',
-        payload: {
-            id
-        }
-    })
+        dispatch({
+            type: 'DELETE',
+            payload: {
+                id
+            }
+        })
    }
 
    const handleChange = ({target})=>setEditText(target.value);
@@ -48,14 +46,26 @@ function TodoCard({todoObj}) {
         
         <div className="card mt-5">
             <div className="card-body">
-                {!isEdit && <small>{formattedDate(postedTime)}</small>}
-                {!isEdit?<p className='fs-5'>{todoContent}</p>: <input className="form-control mb-4" value={editText} type='text' onChange={handleChange}/>}
-                <div className='row justify-content-end'>
-                    <div className='col-auto'>
-                        {isEdit ? <button className='btn btn-danger me-3' onClick={()=>setIsEdit(false)}>Cancel</button>: <button className='btn btn-danger me-3' onClick={handleDelete}>Delete</button>}
-                        {isEdit ? <button className='btn btn-primary' onClick={handleSaveEdit}>save</button>:<button className='btn btn-primary' onClick={handleEdit}>Edit</button>}
-                    </div>
-                </div>
+                {isEdit? 
+										<>
+                        <input className="form-control mb-4" value={editText} type='text' onChange={handleChange}/>
+                        <div className='row justify-content-end'>
+                            <div className='col-auto'>
+                                <button className='btn btn-danger me-3' onClick={()=>setIsEdit(false)}>Cancel</button>
+                                <button className='btn btn-primary' onClick={handleSaveEdit}>save</button>
+                            </div>
+                        </div>
+                    </> : <>
+                            <small>{formattedDate(postedTime)}</small>
+                            <p className='fs-5'>{todoContent}</p>
+                            <div className='row justify-content-end'>
+                                <div className='col-auto'>
+                                    <button className='btn btn-danger me-3' onClick={handleDelete}>Delete</button>
+                                    <button className='btn btn-primary' onClick={handleEdit}>Edit</button>
+                                </div>
+                            </div>
+                         </>
+                    }
             </div>
         </div>
            
