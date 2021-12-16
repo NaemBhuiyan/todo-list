@@ -48,7 +48,6 @@ function TodoCard({todoObj}) {
    const handleChange = ({target})=>setEditText(target.value);
 
     return (
-        
         <div className="card mt-5">
             <div className="card-body">
                 {isEdit? 

@@ -10,7 +10,7 @@ const TodoProvider = ({children})=>{
 
     
 
-     // set localStorage
+  // set localStorage
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
