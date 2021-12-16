@@ -40,6 +40,11 @@ function TodoCard({todoObj}) {
         })
    }
 
+	 const handleCancel = ()=>{
+			setIsEdit(false)
+			setEditText(todoContent)
+	 }
+
    const handleChange = ({target})=>setEditText(target.value);
 
     return (
@@ -51,7 +56,7 @@ function TodoCard({todoObj}) {
                         <input className="form-control mb-4" value={editText} type='text' onChange={handleChange}/>
                         <div className='row justify-content-end'>
                             <div className='col-auto'>
-                                <button className='btn btn-danger me-3' onClick={()=>setIsEdit(false)}>Cancel</button>
+                                <button className='btn btn-danger me-3' onClick={handleCancel}>Cancel</button>
                                 <button className='btn btn-primary' onClick={handleSaveEdit}>save</button>
                             </div>
                         </div>
