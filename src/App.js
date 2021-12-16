@@ -1,18 +1,18 @@
 import './App.css';
 import TodoList from './component/TodoList';
 import TodoPostInput from './component/TodoPostInput';
-import Provider from "./context/AppProvider";
+import TodoProvider from "./context/TodoProvider";
 
 
 function App() {
   return (
-    <Provider>
-      <div className="App">
-        <h1>Todo List</h1>
+    <div className="App">
+      <h1>Todo List</h1>
+      <TodoProvider>
         <TodoPostInput/>
-        <TodoList/>     
-      </div>
-    </Provider>
+        <TodoList/>  
+      </TodoProvider>
+    </div>
     
   );
 }

@@ -42,5 +42,5 @@ function TodoPostInput() {
 
 
 
-export default TodoPostInput
+export default React.memo(TodoPostInput)
 

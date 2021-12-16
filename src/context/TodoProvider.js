@@ -4,7 +4,7 @@ import  reducer  from "../reducer/index";
 
 const initialState = JSON.parse(localStorage.getItem("todoList")) || [];
 
-const AppProvider = ({children})=>{
+const TodoProvider = ({children})=>{
 
     const [todoList, dispatch] = useReducer(reducer, initialState);
 
@@ -21,4 +21,4 @@ const AppProvider = ({children})=>{
 
 }
 
-export default AppProvider;
+export default TodoProvider;
